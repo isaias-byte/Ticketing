@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRUDGerenteWidget</class>
+ <widget class="QWidget" name="CRUDGerenteWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1716</width>
+    <height>1278</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>CRUD</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QWidget" name="page">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="JefeMeseros">
+          <attribute name="title">
+           <string>JefeMeseros</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>CRUD MESEROS</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <item row="11" column="5">
+               <widget class="QPushButton" name="PBEditarJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Editar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QLabel" name="lblApellidoMJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Apellido Materno:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="9" column="0">
+               <widget class="QLabel" name="lblTelefonoJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Teléfono:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLineEdit" name="LENombresJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>Nombres</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QLineEdit" name="LEApellidoPJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>Apellido Paterno</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="6">
+               <widget class="QPushButton" name="PBEliminarJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Eliminar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QLabel" name="lblApellidoPJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Apellido Paterno:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="lblNombresJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>100</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Nombre (s):</string>
+                </property>
+               </widget>
+              </item>
+              <item row="6" column="0">
+               <widget class="QLineEdit" name="LEApellidoMJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>Apellido Materno</string>
+                </property>
+               </widget>
+              </item>
+              <item row="8" column="0">
+               <widget class="QLineEdit" name="LEFechaJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>dd/mm/YYYY</string>
+                </property>
+               </widget>
+              </item>
+              <item row="10" column="0">
+               <widget class="QLineEdit" name="LETelefonoJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="placeholderText">
+                 <string>1234567890</string>
+                </property>
+               </widget>
+              </item>
+              <item row="7" column="0">
+               <widget class="QLabel" name="lblFechaJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Fecha de nacimiento:</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLineEdit" name="LEBuscarJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>500</width>
+                  <height>30</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="2">
+               <widget class="QPushButton" name="PBGuardarJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Guardar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="3">
+               <widget class="QPushButton" name="PBCancelarJefe">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Cancelar</string>
+                </property>
+               </widget>
+              </item>
+              <item row="11" column="1">
+               <widget class="QPushButton" name="PBNuevoJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Nuevo</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="PBBuscarJefe">
+                <property name="maximumSize">
+                 <size>
+                  <width>200</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Buscar</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="Platillos">
+          <attribute name="title">
+           <string>Platillos</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="Mesas">
+          <attribute name="title">
+           <string>Mesas</string>
+          </attribute>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_2"/>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
