@@ -6,8 +6,11 @@
 #include <QJsonDocument>
 #include <QMessageBox>
 #include "crudgerentewidget.h"
-#include <QtSql>
-#include <QSqlDatabase>
+#include <QtSql/QtSql>
+#include <QtSql/QSqlDatabase>
+#include <iostream>
+
+using namespace std;
 
 
 QT_BEGIN_NAMESPACE

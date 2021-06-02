@@ -21,7 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
     m->addSeparator();
     m->addAction(openLoginClient);
 
-
     ui->lblFeliz->setStyleSheet("color: white");
     ui->lblTacontento->setStyleSheet("color: white");
     ui->GBMain->setStyleSheet("color: white");
@@ -46,7 +45,28 @@ MainWindow::MainWindow(QWidget *parent)
     h = ui->lblDerecho->height();
     ui->lblDerecho->setPixmap(pixmap2.scaled(w,h,Qt::KeepAspectRatio));
 
-    /*qDebug()<<"QSslSocket="<<QSslSocket::sslLibraryBuildVersionString();*/
+    /*database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName("D:/Trabajos-tareas/UNI/5_universidad/Ingenieria de Software I/Proyecto/ticketing/build-Ticketing-Desktop_Qt_5_12_10_MinGW_64_bit-Debug/bticketing.db");
+
+    QSqlQuery qry;
+
+    if (database.open())
+    {
+        qry.exec("CREATE TABLE clientes (id_cliente INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
+                 "nombre_cliente VARCHAR(50) NOT NULL,"
+                 "id_mesa VARCHAR(10) NOT NULL)");
+    }*/
+
+
+        /*
+
+        qDebug() << "Connexion FAILED.";
+        qDebug() << "Driver disponible: " << database.drivers();
+        qDebug() << "Driver fonctionnel(QMYSQL): " << database.isDriverAvailable("QSQLITE");
+        qDebug() << "numero de l'erreur: " << database.lastError().number();
+        qDebug() << "database erreur: " << database.lastError().databaseText();
+        qDebug() << "driver erreur: " << database.lastError().driverText();
+        qDebug() << "type erreur: " << database.lastError().type();*/
 
 }
 
@@ -82,12 +102,8 @@ void MainWindow::enableEmpezarPB()
 
 void MainWindow::on_empezarPB_clicked()
 {
-    database = QSqlDatabase::addDatabase("QMYSQL");
-    database.setHostName("localhost");
-    database.setUserName("root");
-    //database.setPort(3306);
-    database.setPassword("");
-    database.setDatabaseName("bticketing");
+    database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName("D:/Trabajos-tareas/UNI/5_universidad/Ingenieria de Software I/Proyecto/ticketing/build-Ticketing-Desktop_Qt_5_12_10_MinGW_64_bit-Debug/bticketing.db");
 
     if (database.open())
     {
@@ -96,8 +112,18 @@ void MainWindow::on_empezarPB_clicked()
         QString mesa = ui->LEMesa->text();
         QString usuario = ui->LENombre->text();
 
-        qry.prepare("INSERT INTO clientes (nombre_cliente, id_mesa)"
-                    "VALUES (usuario, mesa)");
+        qDebug() << "Driver disponible: " << database.drivers();
+        qDebug() << "Driver functional(QSQLITE): " << database.isDriverAvailable("QSQLITE");
+        qDebug() << "numero de error: " << database.lastError().number();
+        qDebug() << "database erreur: " << database.lastError().databaseText();
+        qDebug() << "driver erreur: " << database.lastError().driverText();
+        qDebug() << "type erreur: " << database.lastError().type();
+
+        qry.prepare("INSERT INTO clientes ("
+                    "nombre_cliente,"
+                    "id_mesa)"
+                    "VALUES (:nombre_cliente,:id_mesa);");
+
         qry.bindValue(":nombre_cliente", usuario);
         qry.bindValue(":id_mesa", mesa);
 
