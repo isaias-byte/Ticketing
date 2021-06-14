@@ -1,0 +1,207 @@
+#include "menuwidgets.h"
+#include "ui_menuwidgets.h"
+
+MenuWidgets::MenuWidgets(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::MenuWidgets)
+{
+    ui->setupUi(this);
+    connect(ui->PBOrdenar, SIGNAL(clicked()), this, SLOT(TicketWidget::recibir_ticket()));
+
+}
+
+MenuWidgets::~MenuWidgets()
+{
+    delete ui;
+}
+
+void MenuWidgets::cargarProductos()
+{
+    QSqlDatabase database;
+    database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName(rootDataBase);
+    if (database.open())
+    {
+        QSqlQuery qry;
+
+        if (qry.exec("SELECT id, nombre, precio, descripcion, img FROM platillos;"))
+        {
+            //int cont = 0;
+            while(qry.next())
+            {
+                Producto p;
+
+                //++cont;
+
+                QString id = qry.value(0).toString();
+                QString nombre = qry.value(1).toString();
+                double precio = qry.value(2).toDouble();
+                QString descripcion = qry.value(3).toString();
+                QByteArray byteArray = qry.value(4).toByteArray();
+
+                p.setNombre(nombre);
+                p.setPrecio(precio);
+                p.setDescripcion(descripcion);
+                p.setImg(byteArray);
+
+                products.push_back(p);
+            }
+           /* if(cont != 1)
+            {
+                QMessageBox warning;
+                warning.setText("¡No se encontró el Registro!");
+                warning.setIcon(QMessageBox::Warning);
+                warning.exec();
+            }*/
+
+        }
+        else
+        {
+            QMessageBox succes;
+            succes.setText("¡Tenemos un problema con la base de datos...!");
+            succes.setIcon(QMessageBox::Warning);
+            succes.exec();
+        }
+        qry.clear();
+        database.close();
+    }
+    else
+    {
+        QMessageBox message;
+        message.setText("¡Tenemos un problema con la base de datos...!");
+        message.setIcon(QMessageBox::Warning);
+        message.exec();
+
+    }
+}
+
+void MenuWidgets::cargarWidgets()
+{
+    if ( ui->GLProductos->layout() != NULL )
+    {
+        QLayoutItem* item;
+        while ( ( item = ui->GLProductos->layout()->takeAt(0)) != NULL )
+        {
+            delete item->widget();
+            delete item;
+        }
+    }
+
+    QString resultRe("");
+    resultRe.append("*");
+
+    if( ui->LEBuscarMenu->text().size() != 0 ){
+        resultRe.append(ui->LEBuscarMenu->text().toLower());
+    }
+    else
+    {
+           resultRe.append("[!x]");
+    }
+
+    resultRe.append("*");
+
+    QString wildcardSearch = QRegularExpression::wildcardToRegularExpression(resultRe);
+    QRegularExpression reSearch(wildcardSearch);
+
+
+
+    //row y c son para determinar la fila y columna.
+    //j contar los objetos que tengan match a diferencia de i que cuenta todos
+    int row = 0, c = 0, j = 0;
+    for(unsigned long long i (0) ; i != products.size() ; ++i)
+    {
+
+        QRegularExpressionMatch matchSearch = reSearch.match(products[i].getNombre().toLower());
+
+        if (matchSearch.hasMatch())
+        {
+            ProductWidget* r = new ProductWidget();
+
+            r->setNombre(products[i].getNombre());
+            r->setDescripcion(products[i].getDescripcion());
+            r->setPrecio(QString("%2").arg(products[i].getPrecio()));
+            r->setImg(products[i].getImg());
+            r->showProduct();
+
+            if(j % 5 == 0 )
+            {
+                ++row;
+                c = 0;
+            }
+
+            connect(r, SIGNAL(addItem(QString, QString, QString, QByteArray)), this, SLOT(addToCart (QString, QString, QString, QByteArray)));
+            ui->GLProductos->addWidget(r , 1 + row , 1 + c);
+            ++c;
+            ++j;
+        }
+
+    }
+
+
+}
+
+void MenuWidgets::on_LEBuscarMenu_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1);
+    cargarWidgets();
+}
+
+void MenuWidgets::addToCart(QString nombre, QString precio, QString observacion, QByteArray image)
+{
+    if ( ui->GLCarrito->layout() != NULL )
+    {
+        QLayoutItem* item;
+        while ( ( item = ui->GLCarrito->layout()->takeAt(0)) != NULL )
+        {
+            delete item->widget();
+            delete item;
+        }
+    }
+
+    Producto p;
+
+    p.setNombre(nombre);
+    p.setPrecio(precio.toDouble());
+    p.setObservacion(observacion);
+    p.setImg(image);
+
+    cart.push_back(p);
+
+    //row y c son para determinar la fila y columna.
+    //j contar los objetos que tengan match a diferencia de i que cuenta todos
+    int row = 0, c = 0, j = 0;
+    for(unsigned long long i (0) ; i != cart.size() ; ++i)
+    {
+
+        ProductWidget* r = new ProductWidget();
+
+        r->setNombre(cart[i].getNombre());
+        r->setPrecio(QString("%2").arg(cart[i].getPrecio()));
+        r->setImg(cart[i].getImg());
+        r->setObservacion(cart[i].getObservacion());
+        r->showProduct();
+
+        if(j % 5 == 0 )
+        {
+            ++row;
+            c = 0;
+        }
+
+        ui->GLCarrito->addWidget(r , 1 + row, 1 + c);
+        ++c;
+        ++j;
+    }
+
+}
+
+
+
+void MenuWidgets::on_PBOrdenar_clicked()
+{
+    TicketWidget *ticket;
+    ticket = new TicketWidget();
+    ticket->recibir_ticket(cart);
+    ticket->show();
+    emit crear_ticket(cart);
+
+}
